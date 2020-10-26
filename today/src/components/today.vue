@@ -1,8 +1,6 @@
 <template>
-  <div class='a'>
-    sss
+  <div>
     
-  <button @click="ss">ss</button>
   </div>
 </template>
 
@@ -10,19 +8,21 @@
 export default {
   name: "today",
   methods:{
-    
-    ss(){
-      console.log('ss');
+    handleScroll(){
+      var scrollTop = window.pageYOffset || document.documentElement.scrollTop ||
+                      document.body.scrollTop;
+
     }
   },
-  mounted(){
-      console.log("测试");
+  mounted: function () {
+    window.addEventListener('scroll', this.handleScroll, true);  // 监听（绑定）滚轮滚动事件
+  },
+  destroyed: function () {
+    window.removeEventListener('scroll', this.handleScroll);   //  离开页面清除（移除）滚轮滚动事件
   }
 }
 </script>
 
 <style scoped>
-  .a{
-    color: gold;
-  }
+  
 </style>
