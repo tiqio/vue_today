@@ -1,7 +1,7 @@
 <template>
   <div class='naviBar' :style="{height: naviBarHeight+'px'}" v-if='show_barline'>
     <div class='statusBar' :style="{height: statusBarHeight+'px'}"></div>
-    <div class='today' :style="{top: statusBarHeight+'px', height: naviBarHeight-statusBarHeight+'px'}">今日</div>
+    <div class='today' :style="{top: statusBarHeight+'px', height: naviBarHeight - statusBarHeight+'px'}">今日</div>
     <div class='line'></div>
   </div>
 </template>
@@ -22,6 +22,17 @@ export default {
     handleScroll(){
       var scrollTop = window.pageYOffset || document.documentElement.scrollTop ||
                       document.body.scrollTop;
+      distance = Number(scrollTop + this.naviBarHeight)
+      if(distance < this.screenWidth / 750 * 130){
+        this.show_barline = false;
+        this.naviBarOpacity = 0;
+      }else if(distance < this.screenWidth / 750 * 210){
+        this.show_barline = true;
+        this.naviBarOpacity = 1;
+      }else{
+        this.show_barline = true;
+        this.naviBarOpacity = (distance - this.screenWidth / 750 * 130)/(this.screenWidth / 750 * 80);
+      }
     }
   },
   mounted: function () {
