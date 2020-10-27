@@ -1,17 +1,27 @@
 <template>
-  <div>
-    
+  <div class='naviBar' :style="{height: naviBarHeight+'px'}" v-if='show_barline'>
+    <div class='statusBar' :style="{height: statusBarHeight+'px'}"></div>
+    <div class='today' :style="{top: statusBarHeight+'px', height: naviBarHeight-statusBarHeight+'px'}">今日</div>
+    <div class='line'></div>
   </div>
 </template>
 
 <script>
 export default {
   name: "today",
+  data(){
+    return {
+      naviBarHeight: 70,
+      statusBarHeight: 5,
+      screenWidth: 1,
+      naviBarOpacity: 1,
+      show_barline: true,
+    }
+  },
   methods:{
     handleScroll(){
       var scrollTop = window.pageYOffset || document.documentElement.scrollTop ||
                       document.body.scrollTop;
-
     }
   },
   mounted: function () {
@@ -24,5 +34,32 @@ export default {
 </script>
 
 <style scoped>
-  
+  .naviBar{
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(255,255,255,0.8);
+    -webkit-backdrop-filter: saturate(180%) blur(5px);
+    backdrop-filter: saturate(180%) blur(10px);
+  }
+  .statusBar{
+    width: 100%;
+    opacity: naviBarOpacity;
+  }
+  .today{
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    font-weight: bold;
+  }
+  .line{
+    width: 100%;
+    height: 1px;
+    background-color: #c6c6c8;
+    position: absolute;
+    bottom: 0;
+  }
 </style>
