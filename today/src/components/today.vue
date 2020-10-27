@@ -70,16 +70,17 @@ export default {
       var scrollTop = window.pageYOffset || document.documentElement.scrollTop ||
                       document.body.scrollTop;
       var distance = scrollTop;
-      if(distance < this.screenWidth / 750 * 130){
+      if(distance < 150){
         this.show_barline = false;
         this.naviBarOpacity = 0;
-      }else if(distance < this.screenWidth / 750 * 210){
+      }else if(distance > 600){
         this.show_barline = true;
         this.naviBarOpacity = 1;
       }else{
         this.show_barline = true;
-        this.naviBarOpacity = (distance - this.screenWidth / 750 * 130)/(this.screenWidth / 750 * 80);
+        this.naviBarOpacity = (distance - 150)/(450);
       }
+      console.log(distance);
     }
   },
   mounted: function () {
