@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <today></today>
+    <today>明日</today>
   </div>
 </template>
 

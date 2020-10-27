@@ -1,10 +1,50 @@
 <template>
-  <div style="{overflow: scroll}">
+  <div>
     <div class='naviBar' :style="{height: naviBarHeight+'px'}" v-if='show_barline'>
       <div class='statusBar' :style="{height: statusBarHeight+'px'}"></div>
-      <div class='today' :style="{top: statusBarHeight+'px', height: naviBarHeight - statusBarHeight+'px'}">今日</div>
+      <div class='today' :style="{top: statusBarHeight+'px', height: naviBarHeight - statusBarHeight+'px', 
+                                  opacity: naviBarOpacity}"><slot></slot></div>
       <div class='line'></div>
     </div>
+    <div>测试语句</div>
+    <div>测试语句</div>
+    <div>测试语句</div>
+    <div>测试语句</div>
+    <div>测试语句</div>
+    <div>测试语句</div>
+    <div>测试语句</div>  
+    <div>测试语句</div>
+    <div>测试语句</div>
+    <div class='wrong'>今日</div>
+    <div>测试语句</div>
+    <div>测试语句</div>
+    <div>测试语句</div>
+    <div>测试语句</div>
+    <div>测试语句</div>
+    <div>测试语句</div>
+    <div>测试语句</div>
+    <div>测试语句</div>
+    <div>测试语句</div>
+    <div>测试语句</div>
+    <div>测试语句</div>
+    <div>测试语句</div>
+    <div>测试语句</div>
+    <div>测试语句</div>
+    <div>测试语句</div>
+    <div>测试语句</div>
+    <div>测试语句</div>
+    <div>测试语句</div>
+    <div>测试语句</div>
+    <div>测试语句</div>
+    <div>测试语句</div>
+    <div>测试语句</div>
+    <div>测试语句</div>
+    <div>测试语句</div>
+    <div>测试语句</div>
+    <div>测试语句</div>
+    <div>测试语句</div>
+    <div>测试语句</div>
+    <div>测试语句</div>
     <div>测试语句</div>
     <div>测试语句</div>
     <div>测试语句</div>
@@ -104,7 +144,7 @@ export default {
   }
   .statusBar{
     width: 100%;
-    opacity: naviBarOpacity;
+    /* opacity: naviBarOpacity; 注意css与数据箱不相互连通*/
   }
   .today{
     width: 100vw;
@@ -120,5 +160,11 @@ export default {
     background-color: #c6c6c8;
     position: absolute;
     bottom: 0;
+  }
+  .wrong{
+    display: flex;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: bold;
   }
 </style>
