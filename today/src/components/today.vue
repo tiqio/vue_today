@@ -6,90 +6,8 @@
                                   opacity: naviBarOpacity}"><slot></slot></div>
       <div class='line'></div>
     </div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>  
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div class='wrong'>今日</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
-    <div>测试语句</div>
+    <div style="height: 60px"></div>
+    <div class='wrong'>{{words}}</div>
   </div>
 </template>
 
@@ -100,30 +18,37 @@ export default {
     return {
       naviBarHeight: 70,
       statusBarHeight: 5,
-      screenWidth: 1,
-      naviBarOpacity: 1,
-      show_barline: true,
+      naviBarOpacity: 0,
+      show_barline: false,
+      top: 0,
+      bottom: 0,
     }
   },
+  props:['words'],
   methods:{
     handleScroll(){
+      var that = this;
       var scrollTop = window.pageYOffset || document.documentElement.scrollTop ||
                       document.body.scrollTop;
-      var distance = scrollTop;
-      if(distance < 150){
-        this.show_barline = false;
-        this.naviBarOpacity = 0;
-      }else if(distance > 600){
-        this.show_barline = true;
-        this.naviBarOpacity = 1;
+      var Top = that.top - that.naviBarHeight;
+      var Bottom = that.bottom - that.naviBarHeight;
+      if(scrollTop < Top){
+        that.show_barline = false;
+        that.naviBarOpacity = 0;
+      }else if(scrollTop > Bottom){
+        that.show_barline = true;
+        that.naviBarOpacity = 1;
       }else{
-        this.show_barline = true;
-        this.naviBarOpacity = (distance - 150)/(450);
+        that.show_barline = true;
+        that.naviBarOpacity = (scrollTop - Top)/(Bottom - Top);
       }
-      console.log(distance);
     }
   },
   mounted: function () {
+    var that = this;
+    var wrong = document.querySelector('.wrong');
+    that.top = wrong.getBoundingClientRect().top;
+    that.bottom = wrong.getBoundingClientRect().bottom;
     window.addEventListener('scroll', this.handleScroll, true);  // 监听（绑定）滚轮滚动事件
   },
   destroyed: function () {
@@ -162,6 +87,7 @@ export default {
     bottom: 0;
   }
   .wrong{
+    margin-top: 20px;
     display: flex;
     justify-content: center;
     font-size: 32px;
